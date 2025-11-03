@@ -5,7 +5,7 @@ export default async function Home() {
   const allTasks = await getAllNotes();
   console.log(allTasks);
   return (
-    <div className="grid grid-cols-4 gap-3 max-lg:grid-cols-2 max-md:grid-cols-1 mx-4 max-md:mx-2">
+    <div className="grid grid-cols-4 gap-3 max-lg:grid-cols-2 max-md:grid-cols-1">
       {allTasks.map((t) => (
         <div
           key={t.id}

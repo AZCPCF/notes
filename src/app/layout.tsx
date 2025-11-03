@@ -40,7 +40,7 @@ export default function RootLayout({
             <Link href={"/"}>Notes</Link>
           </h1>
         </header>
-        {children}
+        <main className="mx-4">{children}</main>
       </body>
     </html>
   );
