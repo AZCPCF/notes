@@ -1,10 +1,10 @@
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
-import * as schema from "./schema";
+import * as schema from "@/db/schema";
 
-const sql = postgres(
-  process.env.DATABASE_URL ||
-    "postgres://notes_user:notes_pass@localhost:5432/notes_db"
-);
+// Supabase Postgres connection
+const sql = postgres(process.env.DATABASE_POSTGRES_URL || "", {
+  ssl: { rejectUnauthorized: false }, // Supabase requires SSL
+});
 
 export const db = drizzle(sql, { schema });
