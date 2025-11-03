@@ -5,7 +5,7 @@ import type { NewNote, Note } from "./note.type";
 
 export const noteService = {
   async getAll(): Promise<Note[]> {
-    return db.select().from(notes);
+    return await db.select().from(notes);
   },
 
   async getById(id: number): Promise<Note | undefined> {
@@ -13,18 +13,26 @@ export const noteService = {
     return result[0];
   },
 
-  async create(data: NewNote): Promise<void> {
-    (await db.insert(notes).values(data).run?.()) ??
-      db.insert(notes).values(data);
+  async create(data: NewNote): Promise<Note> {
+    // returning() gives you the inserted row
+    const [inserted] = await db.insert(notes).values(data).returning();
+    return inserted;
   },
 
-  async update(id: number, data: Partial<NewNote>): Promise<void> {
-    (await db.update(notes).set(data).where(eq(notes.id, id)).run?.()) ??
-      db.update(notes).set(data).where(eq(notes.id, id));
+  async update(id: number, data: Partial<NewNote>): Promise<Note | undefined> {
+    const [updated] = await db
+      .update(notes)
+      .set(data)
+      .where(eq(notes.id, id))
+      .returning();
+    return updated;
   },
 
-  async delete(id: number): Promise<void> {
-    (await db.delete(notes).where(eq(notes.id, id)).run?.()) ??
-      db.delete(notes).where(eq(notes.id, id));
+  async delete(id: number): Promise<Note | undefined> {
+    const [deleted] = await db
+      .delete(notes)
+      .where(eq(notes.id, id))
+      .returning();
+    return deleted;
   },
 };
