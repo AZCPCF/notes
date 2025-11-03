@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1762161993329,
+      "tag": "0000_first_mandarin",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1762162040766,
+      "tag": "0001_empty_tana_nile",
+      "breakpoints": true
+    }
+  ]
+}
